@@ -3,6 +3,6 @@
 class Person
 {
    var $firstName;
-   var $lastName;
+   var $password;
 }
 

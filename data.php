@@ -1,27 +1,35 @@
 <?php
         
+		require_once "vo_person.inc.php";
+		require_once "db_connection.php";
+		
 		$servername = "localhost";
 		$databasename= "db_frameworks-extscripting";
-
-		// Create connection
-		$conn=mysql_connect($servername,"root","");
 		
-		mysql_select_db($databasename);
+		$i = 0;
 		
-		$user = "SELECT UserName, UserPass FROM users";
+		$arr = [];
+		
+		$db_conn = new db_conn($servername,$databasename);
 	
-		$userresult	= mysql_query($user,$conn);
+		$userresult	= $db_conn->excecuteQuery("SELECT Username, Password FROM users");
 		
-		
-        require_once "vo_person.inc.php";
         $person = new Person();
+		$person->firstName = "noud";
+		$person->password = "admin";
 		
-		while ($row = mysql_fetch_assoc($userresult)) {
-			$person->firstName=$row['UserName'];
+		while ($row = $userresult->fetch_object()) {
+			$arr[$i] = $row;
+			$i++;
 		}
-        $person->lastName="doedel";
+		
+		/*while ($row = $userresult->fetch_object()) {
+			$arr[$i] = $row;
+			printf("%s (%s)\n",$arr[$i]->Username,$arr[$i]->Password);
+			$i++;
+		}*/
 		
 		header('Content-Type: application/json');
-		$json = json_encode($person);
+		$json = json_encode($arr);
 		echo $json;
  ?>
