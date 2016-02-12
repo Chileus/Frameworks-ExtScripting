@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<button ng-click="count = count + 1">Click Me!</button>
+
+<ul>
+	<li ng-repeat="content.firstName in contents">
+       <a href="#">{{content.firstName}}</a>
+	   <a href="#">{{content.lastName}}</a>
+	</li>
+</ul>
+
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.count = 0;
+});
+		
+app.controller('myCtrl', function($scope, $http) {
+	$http.get("data.php")
+	.then(function (data) {$scope.contents = data});
+});
+	
+				
+
+/*$.getJSON("data.php", function(result){
+			$.each(result, function(name, value){
+		$(aDiv).append(name + ":" + value + "<br/>");
+	});
+});*/	
+</script>
+		
+
+</body>
+</html>
+
