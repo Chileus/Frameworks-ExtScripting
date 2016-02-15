@@ -17,12 +17,49 @@
 				   <a href="#">{{data.UserPass}}</a>
 				</li>
 			</ul>
+			<buttontest></buttontest>
+			<div id="page">
+				test
+			</div>
+			<div svg></div>
 		</div>
 		<script>
 		var app = angular.module('myApp', []);
 		app.controller('myCtrl', function($scope) {
 			$scope.count = 0;
 		});
+
+		app.directive("buttontest", function($compile){
+			return {
+				restrict: "E",
+				template: "<button addbuttons>Click to add buttons</button>",
+				link: function(scope, element, attrs){
+					var html = `<div>Test02</div>`,
+					compiledElement = $compile(html)(scope);
+
+					element.on('click', function(event){
+							var pageElement = angular.element(document.getElementById("page"));
+							pageElement.empty();
+							pageElement.append(compiledElement);
+
+							/*var svg = angular.element('<p> test</p>');
+							element.append(svg)*/
+
+					})
+				}
+			}
+		});
+
+		app.directive("svg",function(){
+			return{
+				link: function(scope,element,attrs){
+					var svg = angular.element('<p> test</p>');
+					element.append(svg)
+				}
+			}
+		})
+
+
 
 		app.controller('myCtrl', function($scope, $http) {
 			$scope.dataArray = [];
