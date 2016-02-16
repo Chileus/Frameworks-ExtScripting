@@ -10,11 +10,11 @@
 
 		$db_conn = new db_conn();
 
-		$userresult	= $db_conn->excecuteQuery("SELECT UserName, UserPass FROM users");
+		$userresult	= $db_conn->excecuteQuery("SELECT Username, Password FROM users");
 
         $person = new Person();
-		$person->firstName = "noud";
-		$person->password = "admin";
+				$person->firstName = "noud";
+				$person->password = "admin";
 
 		while ($row = $userresult->fetch_object()) {
 			$arr[$i] = $row;

@@ -37,7 +37,7 @@
 
           $db_conn = new db_conn();
 
-          $userresult	= $db_conn->excecuteQuery("SELECT `UserName`,`UserPass` FROM `users` WHERE UserName='$username' AND UserPass='$password'");
+          $userresult	= $db_conn->Login($username,$password);
           if($userresult->num_rows > 0){
             return true;
           }else{
