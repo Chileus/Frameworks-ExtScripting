@@ -8,7 +8,7 @@
 
 		$arr = [];
 
-		$db_conn = new db_conn();
+		$db_conn = new getDBInfo('user');
 
 		$userresult	= $db_conn->excecuteQuery("SELECT Username, Password FROM users");
 

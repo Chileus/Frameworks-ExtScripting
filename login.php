@@ -23,6 +23,7 @@
           $password = trim($_POST['password']);
 
           require_once "db_connection.php";
+
           if(!checklogin($username,$password)){
             return false;
           };
@@ -35,10 +36,10 @@
 
         function checklogin($username,$password){
 
-          $db_conn = new db_conn();
+          $db_conn = getDBInfo('user');
 
-          $userresult	= $db_conn->Login($username,$password);
-          if($userresult->num_rows > 0){
+          $userResult	= $db_conn->login($username,$password);
+          if($userResult->num_rows > 0){
             return true;
           }else{
             echo "Username or password is not correct";
