@@ -12,7 +12,7 @@ function getDBInfo($vo_class){
 
    switch ($vo_class) {
      case "user": return new user($conn);
-     case "newsletter": return new NewsletterDAO($conn);
+     case "project": return new project($conn);
  	}
 }
 
