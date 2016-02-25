@@ -4,6 +4,7 @@ $conn;
 function getDBInfo($vo_class){
 
 	require_once "db_connection_user.php";
+	require_once "db_connection_project.php";
 
 	$servername = "localhost";
 	$databasename = "db_frameworks-extscripting";

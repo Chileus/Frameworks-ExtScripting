@@ -19,8 +19,14 @@ class project{
 				}
 			}
 
-			function insert($name){
-				$this->excecuteQuery("INSERT INTO `users`(`Name`) VALUES ('$name')");
+			function insert($name,$userId){
+				$this->excecuteQuery("INSERT INTO `projects`(`Name`) VALUES ('$name')");
+				$this->excecuteQuery("INSERT INTO `projects-users`(`ProjectID`) SELECT `ProjectID` FROM `projects` WHERE Name='$name'");
+				$temp = $this->excecuteQuery("SELECT `ProjectID` FROM `projects` WHERE Name='$name'");
+				$row = mysqli_fetch_assoc($temp);
+				$projectId = $row['ProjectID'];
+
+				$this->excecuteQuery("UPDATE `projects-users` SET `UserID`='$userId' WHERE ProjectID='$projectId'");
 			}
 
 			function update($id,$name,$password){
@@ -31,8 +37,8 @@ class project{
 				$this->excecuteQuery("DELETE FROM `users` WHERE UserID = $id");
 			}
 
-			function selectById($id){
-				return $this->excecuteQuery("SELECT Username, Password FROM users WHERE UserID = $id");
+			function selectByName($name){
+				return $this->excecuteQuery("SELECT ProjectID FROM users WHERE Name = $name");
 			}
 
 			function login($name,$password){

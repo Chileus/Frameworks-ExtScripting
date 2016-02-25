@@ -5,10 +5,11 @@
 	<header>
 		<h1><?php
 			session_start();
-			echo $_SESSION['username'];
+			echo $_SESSION['userId'];
 		?></h1>
 	</header>
 	<body>
+		<div class="container">
 		<div ng-app="myApp" ng-controller="myCtrl">
 			<button ng-click="count = count + 1">Click Me!</button>
 			<div>{{count}}</div>
@@ -24,11 +25,11 @@
 			<button>Hallo</button>
 			<div svg></div>
 		</div>
-		<div class="container">
+
 			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 			  Add Project
 			</button>
-
+			<p id="message">test</p>
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
@@ -37,14 +38,10 @@
 			        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
 			      </div>
 			      <div class="modal-body">
-			        <form role="form">
+			        <form role="form" method="post">
 						  <div class="form-group">
-						    <label for="email">Project Name:</label>
-						    <input type="email" class="form-control" id="email">
-						  </div>
-						  <div class="form-group">
-						    <label for="pwd"> Add users</label>
-						    <input type="password" class="form-control" id="pwd">
+						    <label for="projectname">Project Name:</label>
+						    <input type="projectname" class="form-control" id="projectname" name="projectname">
 						  </div>
 						  <button type="submit" class="btn btn-default">Submit</button>
 						</form>
@@ -58,11 +55,11 @@
 		</div>
 		<script>
 		var app = angular.module('myApp', []);
-		app.controller('myCtrl', function($scope) {
-			$scope.count = 0;
-		});
+			app.controller('myCtrl', function($scope) {
+				$scope.count = 0;
+			});
 
-		app.directive("buttontest", function($compile){
+			app.directive("buttontest", function($compile){
 			return {
 				restrict: "E",
 				template: "<button addbuttons>add Tasks</button>",
@@ -80,6 +77,32 @@
 
 					})
 				}
+			}
+		});
+
+		app.controller('sign_up', function ($scope, $http) {
+			/*
+			* This method will be called on click event of button.
+			* Here we will read the email and password value and call our PHP file.
+			*/
+			$scope.check_credentials = function () {
+
+			document.getElementById("message").textContent = "";
+
+			var request = $http({
+			    method: "post",
+			    url: window.location.href + "login.php",
+			    data: {
+			        email: $scope.email,
+			        pass: $scope.password
+			    },
+			    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+			});
+
+			/* Check whether the HTTP Request is successful or not. */
+			request.success(function (data) {
+			    document.getElementById("message").textContent = "You have login successfully with email "+data;
+			});
 			}
 		});
 
@@ -110,6 +133,22 @@
 		});
 
 		</script>
+		<?php
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			if(empty($_POST['projectname']))
+			{
+					return false;
+			}
+
+			require_once "db_connection.php";
+			$projectname = trim($_POST['projectname']);
+
+			$db_conn = getDBInfo('project');
+			$db_conn->insert($projectname,$_SESSION['userId']);
+
+			}
+		 ?>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 	</body>
