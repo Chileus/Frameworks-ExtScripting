@@ -5,8 +5,14 @@ class project{
 			function __construct($conn){
 				$this->conn = $conn;
 			}
+
 			function excecuteQuery($queryString){
-				return $this->conn->query($queryString);
+				$temp = $this->conn->query($queryString);
+				if (!$temp) {
+  				die($this->conn->error);
+				}else{
+					return $temp;
+				}
 			}
 
 			function user($id,$delete){
@@ -44,6 +50,13 @@ class project{
 			function login($name,$password){
 				return $this->excecuteQuery("SELECT Username, Password FROM users WHERE Username = '$name' AND Password = '$password'");
 			}
-
+			function getProjectUserId($userId){
+				$temp = $this->excecuteQuery("SELECT `ProjectID` FROM `projects-users` WHERE UserID = '$userId'");
+				return $this->excecuteQuery("SELECT `Name` FROM `projects` INNER JOIN `projects-users` ON
+																		`projects`.`ProjectID` = `projects-users`.`ProjectID` WHERE `projects-users`.`UserID` = '$userId'");
+			}
+			function getProjectId($userId){
+				return $this->excecuteQuery("SELECT `ProjectID` FROM `projects` ORDER BY `ProjectID` DESC LIMIT 1");
+			}
 		}
  ?>
