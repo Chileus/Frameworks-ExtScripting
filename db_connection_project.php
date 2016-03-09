@@ -52,11 +52,11 @@ class project{
 			}
 			function getProjectUserId($userId){
 				$temp = $this->excecuteQuery("SELECT `ProjectID` FROM `projects-users` WHERE UserID = '$userId'");
-				return $this->excecuteQuery("SELECT `Name` FROM `projects` INNER JOIN `projects-users` ON
+				return $this->excecuteQuery("SELECT * FROM `projects` INNER JOIN `projects-users` ON
 																		`projects`.`ProjectID` = `projects-users`.`ProjectID` WHERE `projects-users`.`UserID` = '$userId'");
 			}
-			function getProjectId($userId){
-				return $this->excecuteQuery("SELECT `ProjectID` FROM `projects` ORDER BY `ProjectID` DESC LIMIT 1");
+			function getProjectId($email){
+				return $this->excecuteQuery("SELECT `ProjectID` FROM `projects` WHERE `Name` = '$email' ORDER BY `ProjectID` DESC LIMIT 1");
 			}
 		}
  ?>

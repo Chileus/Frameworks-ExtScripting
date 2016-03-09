@@ -17,7 +17,7 @@
 			<div ng-app="myApp" ng-controller="myCtrl">
 				<ul>
 					<li ng-repeat="data in dataArray">
-						<button class="btn btn-default">
+						<button class="btn btn-default" ng-click="getBoard(data.ProjectID)">
 					  	<a href="#">{{data.Name}}</a>
 						</button>
 					</li>

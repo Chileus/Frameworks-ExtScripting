@@ -5,9 +5,9 @@ app.controller('myCtrl', function ($scope, $http) {
   $scope.toggleModal = function(projectName){
     if($scope.showModal){
       $scope.projectName = projectName;
-      $scope.dataArray.push({
-            Name: projectName
-      });
+      //$scope.dataArray.push({
+        //    Name: projectName
+      //});
         var request = $http({
           method: "post",
           url: "postProjects.php",
@@ -19,12 +19,19 @@ app.controller('myCtrl', function ($scope, $http) {
 
       /* Check whether the HTTP Request is successful or not. */
       request.success(function (data) {
-          console.log(data[0]);
+        $scope.dataArray = [];
+        for (var i=0;i<data.length;i++){
+          $scope.dataArray.push(data[i]);
+        }
 
       });
     }
     $scope.showModal = !$scope.showModal;
   };
+
+  $scope.getBoard= function(projectId){
+    console.log(projectId);
+  }
 
   $http.get("getProjects.php")
   .success(function (data) {
