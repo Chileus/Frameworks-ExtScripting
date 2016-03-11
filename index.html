@@ -2,7 +2,7 @@
 <html>
 	<head>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 	</head>
 	<body>
 		<header>
@@ -40,28 +40,12 @@
 		</div>
 		<script>
 
-		var app = angular.module('myApp', [])
+
 
 		</script>
-		<?php
-
-		if($_SERVER['REQUEST_METHOD'] == 'POST'){
-			if(empty($_POST['projectname']))
-			{
-					return false;
-			}
-
-			require_once "db_connection.php";
-			$projectname = trim($_POST['projectname']);
-
-			$db_conn = getDBInfo('project');
-			$db_conn->insert($projectname,$_SESSION['userId']);
-
-			}
-		 ?>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="modalTmp.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="public/js/main.js"></script>
 	</body>
 </html>

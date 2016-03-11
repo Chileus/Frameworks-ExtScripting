@@ -1,0 +1,27 @@
+{
+  "name": "fameworks_extscripting",
+  "version": "1.0.0",
+  "description": "School project",
+  "main": "index.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chileus/Frameworks-ExtScripting.git"
+  },
+  "author": "Noud van Maanen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chileus/Frameworks-ExtScripting/issues"
+  },
+  "homepage": "https://github.com/Chileus/Frameworks-ExtScripting#readme",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.0"
+  }
+}

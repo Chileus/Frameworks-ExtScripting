@@ -1,6 +1,8 @@
 <?php
 
-   require_once "db_connection.php";
+  $destination = $_SERVER['DOCUMENT_ROOT'];
+
+  require_once "$destination/Frameworks-ExtScripting/app/shared/dbConnection/db_connection.php";
 
     session_start();
 
@@ -16,9 +18,7 @@
       header('Location: test.html');
     };
 
-    //$projectInfo = $userInfo->getProjectId($email,$_SESSION['userId']);
-
-     $projectresult = $userInfo->getProjectUserId($_SESSION['userId']);
+    $projectresult = $userInfo->getProjectUserId($_SESSION['userId']);
 
 		while ($row = $projectresult->fetch_object()) {
 			$arr[$i] = $row;
@@ -27,12 +27,5 @@
 
 		$json = json_encode($arr);
 		echo $json;
-
-
-    /*while($row = mysqli_fetch_assoc($projectInfo))
-    $results[] = $row;
-    $json = json_encode($results);
-    echo $json;*/
-
 
 ?>

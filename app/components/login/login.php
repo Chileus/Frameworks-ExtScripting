@@ -1,6 +1,6 @@
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/bootstrap.css">
   </head>
   <body>
     <div class="container">
@@ -29,7 +29,8 @@
           $username = trim($_POST['username']);
           $password = trim($_POST['password']);
 
-          require_once "db_connection.php";
+          $destination = $_SERVER['DOCUMENT_ROOT'];
+          require_once "$destination/Frameworks-ExtScripting/app/shared/dbConnection/db_connection.php";
 
           $db_conn = getDBInfo('user');
 
@@ -44,8 +45,10 @@
           $row = mysqli_fetch_assoc($user_id);
 
           session_start();
+
           $_SESSION['userId']=$row['UserID'];
-          header('Location: index.php');
+
+          header('Location: ../../../index.html');
         }
 
         function checklogin($username,$password,$db_conn){

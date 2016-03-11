@@ -2,8 +2,9 @@
 
 		session_start();
 
-		require_once "vo_person.inc.php";
-		require_once "db_connection.php";
+		$destination = $_SERVER['DOCUMENT_ROOT'];
+
+		require_once "$destination/Frameworks-ExtScripting/app/shared/dbConnection/db_connection.php";
 
 		$i = 0;
 
