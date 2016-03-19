@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="public/js/main.js"></script>
 	</head>
-	<body>
-		<header>
-			<h1>
-				<?php
-					session_start();
-					echo $_SESSION['userId'];
-				?>
-			</h1>
-		</header>
+	<body ng-app="myApp">
 		<div class="container">
-			<div ng-app="myApp" ng-controller="myCtrl">
+			<board></board>
+			<div ng-controller="modalController">
+				<h1> Dit is een bericht : {{message}} </h1>
 				<ul>
 					<li ng-repeat="data in dataArray">
 						<button class="btn btn-default" ng-click="getBoard(data.ProjectID)">
@@ -38,14 +35,5 @@
 				</div>
 			</div>
 		</div>
-		<script>
-
-
-
-		</script>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="public/js/main.js"></script>
 	</body>
 </html>

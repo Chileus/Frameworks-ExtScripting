@@ -1,7 +1,38 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.export = function ($scope, $http, modalController) {
+'use strict';
+
+var angular = require('angular');
+//require('angular-route');
+
+var app = angular.module('myApp', []);
+
+//app.constant('VERSION', require('../../package.json').version);
+
+require('./components/projects/modal/index');
+require('./components/projects/taskBoard/index');
+
+
+
+/*app.config(function($routeProvider) {
+
+  $routeProvider.when('/todos', {
+    templateUrl: 'components/login/login.php',
+    controller: 'login',
+  })
+  .when('/imprint', {
+    templateUrl: '../index.html',
+    controller: 'index',
+  })
+  .otherwise({
+    redirectTo: '../index.html',
+  });
+});*/
+
+},{"./components/projects/modal/index":5,"./components/projects/taskBoard/index":7,"angular":9}],2:[function(require,module,exports){
+module.exports = function ($scope, $http) {
   $scope.showModal = false;
   $scope.dataArray = [];
+  console.log("test");
 
   $scope.toggleModal = function(projectName){
     if($scope.showModal){
@@ -49,8 +80,13 @@ module.export = function ($scope, $http, modalController) {
 
 }
 
-},{}],2:[function(require,module,exports){
-module.export = function (modalDirective) {
+},{}],3:[function(require,module,exports){
+module.exports = function ($scope) {
+  $scope.message = "test";
+}
+
+},{}],4:[function(require,module,exports){
+module.exports = function () {
   return {
     template: '<div class="modal fade">' +
         '<div class="modal-dialog">' +
@@ -93,23 +129,33 @@ module.export = function (modalDirective) {
   };
 };
 
-},{}],3:[function(require,module,exports){
-'use strict';
+},{}],5:[function(require,module,exports){
+'use strict'
 
 var app = require('angular').module('myApp');
 
-app.controller('modalController', require('./controller/modalController'));
-app.directive('modalDirective', require('./directive/modalDirective'));
+var test = require('./controller/test')
+var modalController = require('./controller/modalController');
+//var modalDirective = require('./directive/modalDirective')
 
-},{"./controller/modalController":1,"./directive/modalDirective":2,"angular":6}],4:[function(require,module,exports){
-var app = angular
-  .module('myApp',[
+app.controller('modalController', ['$scope', '$http', modalController])
+app.directive('modal', require ('./directive/modalDirective'))
 
-  ]);
+},{"./controller/modalController":2,"./controller/test":3,"./directive/modalDirective":4,"angular":9}],6:[function(require,module,exports){
+module.exports = function (){
+  return{
+    templateUrl : './app/components/projects/taskBoard/directive/view.html',
+    restrict : 'E'
+  }
+}
 
-require('./app/components/projects/modal');
+},{}],7:[function(require,module,exports){
+'use strict'
 
-},{"./app/components/projects/modal":3}],5:[function(require,module,exports){
+var app = require('angular').module('myApp');
+app.directive('board', require('./directive/taskBoard'))
+
+},{"./directive/taskBoard":6,"angular":9}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.0
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30538,8 +30584,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":5}]},{},[4]);
+},{"./angular":8}]},{},[1]);

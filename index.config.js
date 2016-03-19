@@ -1,6 +1,2 @@
-var app = angular
-  .module('myApp',[
-
-  ]);
-
+require('angular');
 require('./app/components/projects/modal');

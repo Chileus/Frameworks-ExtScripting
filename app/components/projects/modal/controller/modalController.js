@@ -1,4 +1,4 @@
-module.export = function ($scope, $http, modalController) {
+module.exports = function ($scope, $http) {
   $scope.showModal = false;
   $scope.dataArray = [];
   console.log("test");

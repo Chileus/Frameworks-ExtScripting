@@ -1,4 +1,4 @@
-module.export = function (modalDirective) {
+module.exports = function () {
   return {
     template: '<div class="modal fade">' +
         '<div class="modal-dialog">' +

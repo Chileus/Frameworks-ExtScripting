@@ -1,6 +1,10 @@
-'use strict';
+'use strict'
 
 var app = require('angular').module('myApp');
 
-app.controller('modalController', require('./controller/modalController'));
-app.directive('modalDirective', require('./directive/modalDirective'));
+var test = require('./controller/test')
+var modalController = require('./controller/modalController');
+//var modalDirective = require('./directive/modalDirective')
+
+app.controller('modalController', ['$scope', '$http', modalController])
+app.directive('modal', require ('./directive/modalDirective'))
