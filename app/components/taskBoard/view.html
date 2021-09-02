@@ -1,0 +1,181 @@
+<h1> {{boardName}} </h1>
+<div class="col-md-4">
+  <h2> TO DO</h2>
+  <div dragula='"another-bag"' dragula-model='many1' id="1">
+    <div> . </div>
+    <div ng-repeat='data in boardData' id="{{data.TasksID}}" ng-if="data.Importance == 1">
+      <uib-accordion close-others="oneAtATime">
+        <uib-accordion-group heading="{{data.Name}}">
+          <span uib-dropdown on-toggle="toggled(open)">
+            <div>
+              Description: </n>
+              {{data.Text}}
+
+            </div>
+            <div>
+              Date:
+              {{data.Date}}
+            </div>
+            <a href id="simple-dropdown" uib-dropdown-toggle>
+               Assigned member: {{data.UserID}}
+            </a>
+            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+              <li ng-repeat='member in members'>
+                <a href ng-click="assignMember(member.Username, data.TasksID)">{{member.Username}}</a>
+              </li>
+            </ul>
+            <div>
+              <span class="glyphicon glyphicon-edit"></span>
+              <span class="glyphicon glyphicon-ok" ng-click="finishTask(data.TasksID)"></span>
+            </div>
+          </span>
+
+        </uib-accordion-group>
+      </uib-accordion>
+    </div>
+  </div>
+  <div>
+  	<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Create Task</button>
+  	<hr>
+  	<div uib-collapse="isCollapsed">
+      <div class="form-group">
+        <label for="usr">Name:</label>
+        <input type="text" ng-model="taskName01" class="form-control" id="usr">
+      </div>
+      <div class="form-group">
+        <label for="usr">Description:</label>
+        <input type="text" ng-model="Description" class="form-control" id="usr">
+      </div>
+      <label for="usr">Date:</label>
+      <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+      <div ng-click="CreateTask(taskName01,Description,1)" class="btn btn-default">Create Task + </div>
+  	</div>
+  </div>
+
+</div>
+<div class="col-md-4">
+  <h2> Doing </h2>
+  <div dragula='"another-bag"' dragula-model='many2' id="2">
+    <div> . </div>
+    <div ng-repeat='data in boardData' id="{{data.TasksID}}"  ng-if="data.Importance == 2">
+      <uib-accordion close-others="oneAtATime">
+        <uib-accordion-group heading="{{data.Name}}">
+          <span uib-dropdown on-toggle="toggled(open)">
+            <span uib-dropdown on-toggle="toggled(open)">
+              <div>
+                Description: </n>
+                {{data.Text}}
+
+              </div>
+              <div>
+                Date:
+                {{data.Date}}
+              </div>
+              <a href id="simple-dropdown" uib-dropdown-toggle>
+                 Assigned member: {{data.UserID}}
+              </a>
+              <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                <li ng-repeat='member in members'>
+                  <a href ng-click="assignMember(member.Username, data.TasksID)">{{member.Username}}</a>
+                </li>
+              </ul>
+              <div>
+                <span class="glyphicon glyphicon-edit"></span>
+                <span class="glyphicon glyphicon-ok" ng-click="finishTask(data.TasksID)"></span>
+              </div>
+            </span>
+          </span>
+        </uib-accordion-group>
+      </uib-accordion>
+    </div>
+  </div>
+  <div>
+  	<button type="button" class="btn btn-default" ng-click="isCollapsed1 = !isCollapsed1">Create Task</button>
+  	<hr>
+  	<div uib-collapse="isCollapsed1">
+      <div class="form-group">
+        <label for="usr">Name:</label>
+        <input type="text" ng-model="taskName02" class="form-control" id="usr">
+      </div>
+      <div class="form-group">
+        <label for="usr">Description:</label>
+        <input type="text" ng-model="Description02" class="form-control" id="usr">
+      </div>
+      <label for="usr">Date:</label>
+      <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+      <div ng-click="CreateTask(taskName02,Description02,2)" class="btn btn-default">Create Task + </div>
+  	</div>
+  </div>
+</div>
+<div class="col-md-4">
+  <h2> Done </h2>
+  <div dragula='"another-bag"' dragula-model='many3' id="3">
+    <div> . </div>
+    <div ng-repeat='data in boardData' id="{{data.TasksID}}" ng-if="data.Importance == 3 ">
+      <uib-accordion close-others="oneAtATime">
+        <uib-accordion-group is-open="status.open">
+          <uib-accordion-heading>
+            {{data.Name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </uib-accordion-heading>
+          <span uib-dropdown on-toggle="toggled(open)">
+            <span uib-dropdown on-toggle="toggled(open)">
+              <div>
+                Description: </n>
+                {{data.Text}}
+
+              </div>
+              <div>
+                Date:
+                {{data.Date}}
+              </div>
+              <a href id="simple-dropdown" uib-dropdown-toggle>
+                 Assigned member: {{data.UserID}}
+              </a>
+              <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                <li ng-repeat='member in members'>
+                  <a href ng-click="assignMember(member.Username, data.TasksID)">{{member.Username}}</a>
+                </li>
+              </ul>
+              <div>
+                <span class="glyphicon glyphicon-edit"></span>
+                <span class="glyphicon glyphicon-ok" ng-click="finishTask(data.TasksID)"></span>
+              </div>
+            </span>
+          </span>
+        </uib-accordion-group>
+      </uib-accordion>
+  </div>
+</div>
+<div>
+  <button type="button" class="btn btn-default" ng-click="isCollapsed2 = !isCollapsed2">Create Task</button>
+  <hr>
+  <div uib-collapse="isCollapsed2">
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" ng-model="taskName03" class="form-control" id="usr">
+    </div>
+    <div class="form-group">
+      <label for="usr">Description:</label>
+      <input type="text" ng-model="Description03" class="form-control" id="usr">
+    </div>
+    <label for="usr">Date:</label>
+    <p class="input-group">
+      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+    <div ng-click="CreateTask(taskName03,Description03,3)" class="btn btn-default">Create Task + </div>
+  </div>
+</div>
+</div>

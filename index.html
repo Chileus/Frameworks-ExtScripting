@@ -2,38 +2,15 @@
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href='node_modules/angular-dragula/dist/dragula.css' rel='stylesheet' type='text/css' />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="public/js/main.js"></script>
 	</head>
 	<body ng-app="myApp">
-		<div class="container">
-			<board></board>
-			<div ng-controller="modalController">
-				<h1> Dit is een bericht : {{message}} </h1>
-				<ul>
-					<li ng-repeat="data in dataArray">
-						<button class="btn btn-default" ng-click="getBoard(data.ProjectID)">
-					  	<a href="#">{{data.Name}}</a>
-						</button>
-					</li>
-					<li>
-						<button ng-click="toggleModal()" class="btn btn-default">Create Project</button>
-					</li>
-				</ul>
-				<div class="container">
-					<modal title="Login form" visible="showModal">
-			    	<form role="form" method="post">
-			      	<div class="form-group">
-			      		<label for="email">Project Name</label>
-			      		<input class="form-control" ng-model="projectName" id="email" placeholder="Enter project name" />
-			      	</div>
-			      	<button type="submit" ng-click="toggleModal(projectName)" class="btn btn-default">Submit</button>
-			    	</form>
-		  		</modal>
-				</div>
-			</div>
-		</div>
+		<div class="container" ng-view>
+			
+		<div>
 	</body>
 </html>

@@ -38,6 +38,12 @@ class user{
 			function login($name,$password){
 				return $this->excecuteQuery("SELECT Username, Password FROM users WHERE Username = '$name' AND Password = '$password'");
 			}
+			function getMembers($ProjectId){
+				return $this->excecuteQuery("SELECT david.Username, noud.Admin FROM users as david, `projects-users` as noud WHERE noud.ProjectID = '$ProjectId' AND david.UserID = noud.UserID ");
+			}
+			function checkAdmin($UserId,$ProjectId){
+				return $this->excecuteQuery("SELECT * FROM `projects-users` WHERE UserID = '$UserId' AND ProjectID = $ProjectId");
+			}
 
 		}
  ?>

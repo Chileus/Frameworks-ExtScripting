@@ -1,0 +1,24 @@
+<form>
+  <div id="legend">
+    <legend>Register</legend>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail">Email</label>
+      <input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="register_email">
+  </div>
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="register_password">
+  </div>
+  <div class="form-group">
+    <label for="password_confirm">Password (Confirm)</label>
+      <input id="password_confirm" name="password_confirm" placeholder="" class="form-control" type="password" ng-model="register_password_comfirm">
+  </div>
+  <div class="form-group">
+    <div>
+      <button type="submit" ng-click="check_register()" class="btn btn-default">Register</button>
+      <a href="#/login" class="btn btn-link">Cancel</a>
+    </div>
+  </div>
+  <p class="bg-danger">{{message}}</p>
+</form>

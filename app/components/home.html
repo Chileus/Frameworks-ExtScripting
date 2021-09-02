@@ -1,0 +1,46 @@
+<div ng-controller="projectController">
+  <div class="col-md-2">
+    <h2> Projects </h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li ng-repeat="data in dataArray">
+        <button class="btn btn-default" ng-click="getBoard(data.ProjectID,data.Name)">
+          {{data.Name}}<span ng-if="data.Admin == 1" class="glyphicon glyphicon-star"></span>
+        </button>
+        <button ng-if="data.Admin == 1" type="button" class="close" aria-label="Close" ng-click="removeBoard(data.ProjectID)"><span aria-hidden="true">&times;</span></button>
+        <button ng-if="data.Admin == 0" type="button" class="glyphicon glyphicon-ban-circle close" aria-label="Close" ng-click="leaveBoard(data.ProjectID)"><span aria-hidden="true">&times;</span></button>
+      </li>
+      <li>
+        <uib-accordion close-others="oneAtATime">
+          <uib-accordion-group is-open="status.open">
+            <uib-accordion-heading>
+              Create Project<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </uib-accordion-heading>
+            <span uib-dropdown on-toggle="toggled(open)">
+                <form role="form" method="post">
+                  <div class="form-group">
+                    <label for="email">Project Name</label>
+                    <input class="form-control" ng-model="projectName" id="email" placeholder="Enter project name" />
+                  </div>
+                  <button type="submit" ng-click="toggleModal(projectName)" class="btn btn-default">Submit</button>
+                </form>
+              <p ng-bind='data.UserID'><p>
+              <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                <li ng-repeat='member in members'>
+                  <a href ng-click="assignMember(member.Username, data.TasksID)">{{member.Username}}</a>
+                </li>
+              </ul>
+            </span>
+          </uib-accordion-group>
+        </uib-accordion>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-8" ng-controller="boardController" ng-hide="select">
+    <board>
+    </board>
+  </div>
+  <div class ="col-md-2" ng-controller="membersController" ng-hide="select">
+    <memberlist>
+    </memberlist>
+  </div>
+</div>
